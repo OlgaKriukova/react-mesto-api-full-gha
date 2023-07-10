@@ -1,0 +1,6 @@
+.navMenu {
+  display: flex;
+  flex-direction: column;
+
+  background-color: rgb(222, 211, 63);
+}

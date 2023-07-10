@@ -1,0 +1,17 @@
+.login__enter {
+  display: flex;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding: 0;
+  border: 0;
+  width: 358px;
+  height: 17px;
+  justify-content: center;
+  color: #fff;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  cursor: pointer;
+
+  /* display: none; */
+}

@@ -1,0 +1,22 @@
+.navBar {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  list-style-type: none;
+}
+
+@media (max-width: 920px) {
+  .navBar {
+    margin-left: 19px;
+  }
+}
+
+@media (max-width: 420px) {
+  .navBar {
+    flex-direction: column;
+    align-items: flex-end;
+    height: auto;
+    margin-bottom: 28px;
+  }
+}

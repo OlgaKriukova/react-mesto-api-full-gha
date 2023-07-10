@@ -1,0 +1,10 @@
+.login__enter-link {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #fff;
+}
+
+.login__enter-link:hover {
+  color: #a9a9a9;
+}

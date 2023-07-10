@@ -1,0 +1,10 @@
+.figure__img {
+  display: inline-block;
+  margin: 0;
+  width: 282px;
+  height: 282px;
+  object-fit: cover;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  z-index: 1;
+}

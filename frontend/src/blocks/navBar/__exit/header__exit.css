@@ -1,0 +1,29 @@
+.header__exit {
+  padding-top: -25px;
+  align-items: flex-end;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  color: #a9a9a9;
+  background-color: #000;
+  border: none;
+}
+
+.header__exit:hover {
+  color: #fff;
+}
+
+@media (max-width: 920px) {
+  .header__exit {
+    margin-right: 19px;
+  }
+}
+
+@media (max-width: 580px) {
+  .header__exit {
+    width: 104px;
+    height: 24px;
+    margin-bottom: 28px;
+    margin-right: 27px;
+  }
+}

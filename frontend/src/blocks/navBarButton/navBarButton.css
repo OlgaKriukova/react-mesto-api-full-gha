@@ -1,0 +1,23 @@
+.navBarButton {
+  margin: 0;
+  margin-right: 30px;
+  padding: 0;
+  border: none;
+  width: 24px;
+  height: 24px;
+  background-color: rgb(77, 203, 98);
+  align-self: flex-end;
+  /* content: "\f0c9";
+  color: #fff; */
+}
+
+/* .navBarButton::before {
+  content: "\f0c9";
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
+  
+  color: #fff;
+  font-size: 18px;
+} */

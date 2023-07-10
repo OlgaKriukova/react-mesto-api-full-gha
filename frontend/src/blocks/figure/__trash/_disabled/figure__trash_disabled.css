@@ -1,0 +1,4 @@
+.figure__trash_disabled {
+    opacity: 0;
+    display: none;
+}

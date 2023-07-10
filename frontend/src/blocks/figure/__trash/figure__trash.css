@@ -1,0 +1,15 @@
+.figure__trash {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  margin-top: 20px;
+  margin-left: 244px;
+  position: absolute;
+  z-index: 1;
+  background-color: transparent;
+  cursor: pointer; 
+}
+
+.figure__trash:hover {
+  opacity: 0.8;
+}

@@ -1,0 +1,27 @@
+.login__input {
+  margin: 0;
+  padding: 0;
+  margin-top: 30px;
+  margin-left: 36px;
+  margin-right: 36px;
+  padding-bottom: 13px;
+  max-width: 358px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  border: none;
+  border-bottom: 2px solid #cccccc;
+  color: #fff;
+  background-color: #000;
+}
+
+.login__input:focus {
+  border: 2px solid #cccccc;
+}
+
+@media (max-width: 621px) {
+  .login__input-second {
+    margin: 0 22px;
+    margin-top: 30px;
+  }
+}

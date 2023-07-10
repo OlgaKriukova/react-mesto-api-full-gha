@@ -1,0 +1,16 @@
+.edit-avatar-button {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    flex-direction: row;
+    background-color: #000;
+    border: 0;
+    box-shadow: none;
+}
+
+.edit-avatar-button:hover .overlay{
+    opacity: 1;
+}

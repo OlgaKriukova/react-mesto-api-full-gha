@@ -1,0 +1,10 @@
+.navBarButton__img {
+  background-color: #000;
+  color: #fff;
+}
+
+@media (max-width: 580px) {
+  .navBarButton__img {
+    background-color: rgb(230, 103, 103);
+  }
+}

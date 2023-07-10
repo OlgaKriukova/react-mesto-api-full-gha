@@ -1,0 +1,23 @@
+.header__img {
+  margin: 0;
+  margin-right: auto;
+
+  margin-bottom: 38px;
+  width: 142px;
+  height: 33px;
+}
+
+@media (max-width: 920px) {
+  .header__img {
+    margin-left: 19px;
+  }
+}
+
+@media (max-width: 580px) {
+  .header__img {
+    width: 104px;
+    height: 24px;
+    margin-bottom: 28px;
+    margin-left: 27px;
+  }
+}

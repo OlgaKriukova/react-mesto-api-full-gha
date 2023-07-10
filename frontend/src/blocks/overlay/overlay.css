@@ -1,0 +1,10 @@
+.overlay {
+  padding: 47px;
+  position: absolute;
+  transition: all 0.3s;
+  opacity: 0;
+  z-index: 3;
+  width: 26px;
+  height: 26px;
+  background-color: rgb(0, 0, 0, 0.6);
+}

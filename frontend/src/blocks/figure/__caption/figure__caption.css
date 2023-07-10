@@ -1,0 +1,4 @@
+.figure__caption {
+  display: flex;
+  align-items: center;
+}
