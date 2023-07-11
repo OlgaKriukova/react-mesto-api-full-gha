@@ -27,7 +27,7 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-console.log(`try connect to ${MONGO_URL}/mestodb !!!`);
+console.log(`try connect to ${MONGO_URL}/mestodb !!!!`);
 
 mongoose.connect(`${MONGO_URL}/mestodb`, {
   useNewUrlParser: true,
