@@ -8,7 +8,10 @@ const NotFoundError = require('./errors/NotFoundError');
 
 const errorMessageNotFound = 'resource not found';
 
-const { PORT = 3000 } = process.env;
+const {
+  PORT = 3000,
+  MONGO_URL = 'mongodb://localhost:27017'
+} = process.env;
 
 const userRoutes = require('./routes/users');
 const cardRoutes = require('./routes/cards');
