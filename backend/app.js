@@ -29,6 +29,17 @@ const allowedCors = [
 
 const app = express();
 
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+
+  console.log(`origin: ${origin}`);
+
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  next();
+});
+
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -42,17 +53,6 @@ mongoose.connect(`${MONGO_URL}/mestodb`, {
     // eslint-disable-next-line no-console
     console.log('connected to db');
   });
-
-app.use((req, res, next) => {
-  const { origin } = req.headers;
-
-  console.log(`origin: ${origin}`);
-
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
-  next();
-});
 
 app.post(
   '/signin',
