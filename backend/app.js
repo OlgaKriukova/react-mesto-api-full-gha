@@ -11,8 +11,10 @@ const NotFoundError = require('./errors/NotFoundError');
 const errorMessageNotFound = 'resource not found';
 
 const {
-  PORT = 3000,
-  MONGO_URL = 'mongodb://localhost:27017',
+  PORT = 3001,
+  MONGO_URL = 'mongodb://127.0.0.1:27017',
+  NODE_ENV = 'production',
+  JWT_SECRET = 'OlyaSimpleSecret',
 } = process.env;
 
 const userRoutes = require('./routes/users');
@@ -25,6 +27,7 @@ const allowedCors = [
   'https://praktikum.tk',
   'http://praktikum.tk',
   'localhost:3000',
+  'http://localhost:3000',
 ];
 
 const app = express();
@@ -32,11 +35,26 @@ const app = express();
 app.use((req, res, next) => {
   const { origin } = req.headers;
 
+  const { method } = req;
+  const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
+
+  const requestHeaders = req.headers['access-control-request-headers'];
+
   console.log(`origin: ${origin}`);
 
   if (allowedCors.includes(origin)) {
+    console.log('add header');
     res.header('Access-Control-Allow-Origin', origin);
   }
+
+  console.log(`method: ${method}`);
+
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    res.header('Access-Control-Allow-Headers', requestHeaders);
+    return res.end();
+  }
+
   next();
 });
 

@@ -1,4 +1,5 @@
-const baseUrl = 'http://mesto.ok.front.nomoredomains.work';
+//const baseUrl = 'http://mesto.ok.front.nomoredomains.work';
+const baseUrl = 'http://localhost:3001';
 
 function checkResponse(res) {
   console.log('res.ok = '+res.ok)
