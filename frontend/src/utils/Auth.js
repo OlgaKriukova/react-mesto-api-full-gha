@@ -1,4 +1,4 @@
-const baseUrl = 'https://auth.nomoreparties.co';
+const baseUrl = 'http://mesto.ok.front.nomoredomains.work';
 
 function checkResponse(res) {
   console.log('res.ok = '+res.ok)
@@ -9,6 +9,8 @@ function checkResponse(res) {
 }
 
 export const signup = (email, password) => {
+  console.log(`signup -  ${baseUrl}/signup`);
+
   return fetch(`${baseUrl}/signup`, {
     method: 'POST',
     headers: {

@@ -6,7 +6,7 @@ class Api {
         this.likeCard = this.likeCard.bind(this);
         this.delCard = this.delCard.bind(this);
     }
-  
+
     _checkResponse(res) {
         if (res.ok) {
             return res.json();
@@ -31,7 +31,7 @@ class Api {
                      },
                      body: JSON.stringify({name: name, link: link})
                })
-            .then(this._checkResponse); 
+            .then(this._checkResponse);
     }
 
     delCard(cardId) {
@@ -43,13 +43,13 @@ class Api {
                      'Content-Type': 'application/json'
                      }
                })
-            .then(this._checkResponse); 
+            .then(this._checkResponse);
     }
 
     likeCard(cardId, active) {
         let method;
         if (active) {method = 'PUT';}
-        else {method = 'DELETE';} 
+        else {method = 'DELETE';}
 
         return fetch(this._baseUrl+'/cards/'+cardId+'/likes', {
             method: method,
@@ -57,7 +57,7 @@ class Api {
             authorization: this._authorization,
             'Content-Type': 'application/json'
             }})
-        .then(this._checkResponse); 
+        .then(this._checkResponse);
     }
 
     getUserInfo() {
@@ -77,7 +77,7 @@ class Api {
                      },
                      body: JSON.stringify({name: name, about: about})
                })
-            .then(this._checkResponse); 
+            .then(this._checkResponse);
     }
 
     setUserAvatar({avatar}) {
@@ -89,20 +89,17 @@ class Api {
                      },
                      body: JSON.stringify({avatar: avatar})
                })
-            .then(this._checkResponse); 
+            .then(this._checkResponse);
     }
 
 }
 
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
+    baseUrl: 'http://mesto.ok.front.nomoredomains.work',
     headers: {
-      authorization: 'dd879867-23bd-49db-b064-5541b8e26a1d',
+      authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGFkYjc2MzllYTRmMTI0MTJhN2Q1OTUiLCJpYXQiOjE2ODkxMDY0MzIsImV4cCI6MTY4OTcxMTIzMn0.6fpMn3Yem7mxRB6qeY-gYASyjzvd9ry1uGQPdDZ60SI',
       'Content-Type': 'application/json'
     }
 })
 
 export default api;
-
-
-

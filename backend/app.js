@@ -21,6 +21,12 @@ const cardRoutes = require('./routes/cards');
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 
+const allowedCors = [
+  'https://praktikum.tk',
+  'http://praktikum.tk',
+  'localhost:3000',
+];
+
 const app = express();
 
 app.use(helmet());
@@ -36,6 +42,17 @@ mongoose.connect(`${MONGO_URL}/mestodb`, {
     // eslint-disable-next-line no-console
     console.log('connected to db');
   });
+
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+
+  console.log(`origin: ${origin}`);
+
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  next();
+});
 
 app.post(
   '/signin',
