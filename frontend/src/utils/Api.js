@@ -2,9 +2,17 @@
 class Api {
     constructor(options) {
         this._baseUrl = options.baseUrl;
-        this._authorization = options.headers.authorization;
+        this._token = '';
         this.likeCard = this.likeCard.bind(this);
         this.delCard = this.delCard.bind(this);
+    }
+
+    get token() {
+      return this._token;
+    }
+
+    set token(value) {
+      this._token = value;
     }
 
     _checkResponse(res) {
@@ -16,17 +24,16 @@ class Api {
 
     getInitialCards() {
         return fetch(this._baseUrl+'/cards', {
-            headers: {
-              authorization: this._authorization
-            }})
+            method: 'GET',
+            credentials: 'include'})
             .then(this._checkResponse);
     }
 
     addCard({name, link}) {
         return fetch(this._baseUrl+'/cards', {
                      method: 'POST',
+                     credentials: 'include',
                      headers: {
-                     authorization: this._authorization,
                      'Content-Type': 'application/json'
                      },
                      body: JSON.stringify({name: name, link: link})
@@ -38,8 +45,8 @@ class Api {
         console.log(this._baseUrl+'/cards/'+cardId);
         return fetch(this._baseUrl+'/cards/'+cardId, {
                      method: 'DELETE',
+                     credentials: 'include',
                      headers: {
-                     authorization: this._authorization,
                      'Content-Type': 'application/json'
                      }
                })
@@ -53,8 +60,8 @@ class Api {
 
         return fetch(this._baseUrl+'/cards/'+cardId+'/likes', {
             method: method,
+            credentials: 'include',
             headers: {
-            authorization: this._authorization,
             'Content-Type': 'application/json'
             }})
         .then(this._checkResponse);
@@ -62,8 +69,9 @@ class Api {
 
     getUserInfo() {
         return fetch(this._baseUrl+'/users/me', {
+            method: 'GET',
+            credentials: 'include',
             headers: {
-              authorization: this._authorization
             }})
             .then(this._checkResponse);
     }
@@ -71,8 +79,8 @@ class Api {
     setUserInfo({name, about}) {
         return fetch(this._baseUrl+'/users/me', {
                      method: 'PATCH',
+                     credentials: 'include',
                      headers: {
-                     authorization: this._authorization,
                      'Content-Type': 'application/json'
                      },
                      body: JSON.stringify({name: name, about: about})
@@ -83,8 +91,8 @@ class Api {
     setUserAvatar({avatar}) {
         return fetch(this._baseUrl+'/users/me/avatar', {
                      method: 'PATCH',
+                     credentials: 'include',
                      headers: {
-                     authorization: this._authorization,
                      'Content-Type': 'application/json'
                      },
                      body: JSON.stringify({avatar: avatar})
@@ -92,14 +100,56 @@ class Api {
             .then(this._checkResponse);
     }
 
+    signup = (email, password) => {
+        return fetch(`${this._baseUrl}/signup`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({password, email})
+        })
+        .then(this._checkResponse)
+    }
+
+    signin = (email, password) => {
+        console.log(`signin: ${this._baseUrl}/signin`);
+        return fetch(this._baseUrl+'/signin', {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({password, email})
+        })
+        .then(this._checkResponse)
+    };
+
+    signout = () => {
+        console.log(`signout: ${this._baseUrl}/users/me`);
+        return fetch(`${this._baseUrl}/users/me`, {
+          method: 'DELETE',
+          credentials: 'include'
+        })
+        .then(this._checkResponse)
+    };
+
+    checkToken = (checkedToken) => {
+        console.log(`checkedToken: ${checkedToken}`)
+        return fetch(`${this._baseUrl}/users/me`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+          }
+        })
+        .then(this._checkResponse)
+    }
 }
 
 const api = new Api({
     baseUrl: 'http://mesto.ok.front.nomoredomains.work',
-    headers: {
-      authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGFkYjc2MzllYTRmMTI0MTJhN2Q1OTUiLCJpYXQiOjE2ODkxMDY0MzIsImV4cCI6MTY4OTcxMTIzMn0.6fpMn3Yem7mxRB6qeY-gYASyjzvd9ry1uGQPdDZ60SI',
-      'Content-Type': 'application/json'
-    }
+    //baseUrl: 'http://localhost:3001',
 })
 
 export default api;

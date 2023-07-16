@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import api from "../utils/Api";
-import { signin, signup, checkToken } from "../utils/Auth.js";
 import Main from "./Main";
 import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
@@ -26,22 +25,16 @@ function App() {
   const [cards, setCards] = useState([]);
   const [email, setEmail] = useState("");
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      const token = localStorage.getItem("token");
-      console.log("token found - " + token);
 
-      checkToken(token)
-        .then((result) => {
-          setEmail(result.data.email);
-          navigate("/", { replace: true });
-        })
-        .catch((err) => {
-          console.log("check token - catch - " + err);
-        });
-    } else {
-      console.log("token not found");
-    }
+  useEffect(() => {
+    api.getUserInfo()
+    .then((result) => {
+      setEmail(result.email);
+      navigate("/", { replace: true });
+    })
+    .catch((err) => {
+      console.log("getUserInfo - catch - " + err);
+    });
   }, []);
 
   useEffect(() => {
@@ -156,7 +149,7 @@ function App() {
   }
 
   function handleLogOut() {
-    localStorage.removeItem("token");
+    api.signout();
     navigate("/sign-in", { replace: true });
   }
 
@@ -166,7 +159,7 @@ function App() {
       return null;
     }
 
-    signup(email, password)
+    api.signup(email, password)
       .then(() => {
         setInfoTooltipData({
           isSuccess: true,
@@ -189,13 +182,10 @@ function App() {
       return;
     }
 
-    signin(email, password)
-      .then((data) => {
-        if (data.token) {
-          localStorage.setItem("token", data.token);
-          setEmail(email);
-          navigate("/", { replace: true });
-        }
+    api.signin(email, password)
+      .then(() => {
+        setEmail(email);
+        navigate("/", { replace: true });
       })
       .catch((err) => {
         setInfoTooltipData({

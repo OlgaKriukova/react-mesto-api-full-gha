@@ -1,6 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 require('dotenv').config();
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -13,8 +14,6 @@ const errorMessageNotFound = 'resource not found';
 const {
   PORT = 3001,
   MONGO_URL = 'mongodb://127.0.0.1:27017',
-  NODE_ENV = 'production',
-  JWT_SECRET = 'OlyaSimpleSecret',
 } = process.env;
 
 const userRoutes = require('./routes/users');
@@ -40,14 +39,10 @@ app.use((req, res, next) => {
 
   const requestHeaders = req.headers['access-control-request-headers'];
 
-  console.log(`origin: ${origin}`);
-
   if (allowedCors.includes(origin)) {
-    console.log('add header');
     res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', 'true');
   }
-
-  console.log(`method: ${method}`);
 
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
@@ -61,8 +56,9 @@ app.use((req, res, next) => {
 app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-console.log(`try connect to ${MONGO_URL}/mestodb !!!!`);
+console.log(`try connect to ${MONGO_URL}/mestodb`);
 
 mongoose.connect(`${MONGO_URL}/mestodb`, {
   useNewUrlParser: true,

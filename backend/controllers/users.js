@@ -5,16 +5,34 @@ const NotFoundError = require('../errors/NotFoundError');
 const UniqueError = require('../errors/UniqueError');
 const WrongDataError = require('../errors/WrongDataError');
 
+const { NODE_ENV, JWT_SECRET } = process.env;
+
 const login = (req, res, next) => {
   const { email, password } = req.body;
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      res.status(200).send({
-        token: jwt.sign({ _id: user._id }, 'my-super-secret-key-AA9u$u2MM', { expiresIn: '7d' }),
-      });
+      const newToken = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret', { expiresIn: '7d' });
+      res
+        .status(200)
+        .cookie(
+          'jwt',
+          newToken,
+          {
+            maxAge: 604800000,
+            httpOnly: true,
+            sameSite: true,
+          },
+        )
+        .send({
+          message: 'authorization successful',
+        });
     })
     .catch(next);
+};
+
+const logOut = (req, res) => {
+  res.status(200).clearCookie('jwt').send({ message: 'Logged out' });
 };
 
 const createUser = (req, res, next) => {
@@ -105,6 +123,7 @@ module.exports = {
   getUserById,
   getUserMe,
   login,
+  logOut,
   createUser,
   updateUser,
   updateUserAvatar,
