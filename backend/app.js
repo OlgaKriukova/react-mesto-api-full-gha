@@ -26,12 +26,13 @@ const auth = require('./middlewares/auth');
 const allowedCors = [
   'https://mestook.nomoredomains.xyz',
   'http://mestook.nomoredomains.xyz',
-  'localhost:3001',
-  'http://localhost:3001',
+  'localhost:3000',
+  'http://localhost:3000',
 ];
 
 const app = express();
 
+// eslint-disable-next-line consistent-return
 app.use((req, res, next) => {
   const { origin } = req.headers;
 
@@ -58,8 +59,6 @@ app.use(helmet());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-console.log(`try connect to ${MONGO_URL}/mestodb`);
 
 mongoose.connect(`${MONGO_URL}/mestodb`, {
   useNewUrlParser: true,
