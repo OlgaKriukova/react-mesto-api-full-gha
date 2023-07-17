@@ -81,7 +81,7 @@ app.post(
   celebrate({
     body: Joi.object().keys({
       email: Joi.string().required().email(),
-      password: Joi.string().required().min(4),
+      password: Joi.string().required(),
     }),
   }),
   login,
@@ -106,9 +106,9 @@ app.use(auth);
 app.use('/users', userRoutes);
 app.use('/cards', cardRoutes);
 
-app.use(errorLogger);
-
 app.use((req, res, next) => next(new NotFoundError(errorMessageNotFound)));
+
+app.use(errorLogger);
 
 app.use(errors());
 

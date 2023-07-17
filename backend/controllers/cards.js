@@ -5,16 +5,15 @@ const WrongDataError = require('../errors/WrongDataError');
 const ForbiddenError = require('../errors/ForbiddenError');
 
 const getCards = (req, res, next) => {
-  Card.find({})
+  Card.find({}).sort({ createdAt: -1 })
     .populate(['owner', 'likes'])
     .then((cards) => res.status(200).send(cards))
     .catch(next);
 };
 
 const createCard = (req, res, next) => {
-  const newCardData = req.body;
-  newCardData.owner = req.user._id;
-  Card.create(newCardData)
+  req.body.owner = req.user._id;
+  Card.create(req.body)
     .then((newCard) => newCard.populate('owner')
       .then((newCardPopulated) => res.status(201).send(newCardPopulated)))
     .catch((err) => {

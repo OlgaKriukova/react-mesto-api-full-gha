@@ -1,7 +1,6 @@
 class Forbidden extends Error {
-  constructor(message) {
-    const defaultMessage = 'Нет доступа';
-    super(message || defaultMessage);
+  constructor(message = 'Нет доступа') {
+    super(message);
     this.statusCode = 403;
   }
 }
