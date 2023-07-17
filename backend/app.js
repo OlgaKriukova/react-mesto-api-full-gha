@@ -13,7 +13,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorMessageNotFound = 'resource not found';
 
 const {
-  PORT = 3001,
+  PORT = 3000,
   MONGO_URL = 'mongodb://127.0.0.1:27017',
 } = process.env;
 
