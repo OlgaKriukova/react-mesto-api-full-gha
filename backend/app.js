@@ -25,8 +25,8 @@ const auth = require('./middlewares/auth');
 const allowedCors = [
   'https://mesto.ok.front.nomoredomain1s.work',
   'http://mesto.ok.front.nomoredomain1s.work',
-  'localhost:3000',
-  'http://localhost:3000',
+  'localhost:3001',
+  'http://localhost:3001',
 ];
 
 const app = express();

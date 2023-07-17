@@ -148,7 +148,7 @@ class Api {
 }
 
 const api = new Api({
-    baseUrl: 'http://mesto.ok.front.nomoredomains.work',
+baseUrl: 'http://api.mesto.ok.front.nomoredomains.work',
     //baseUrl: 'http://localhost:3001',
 })
 
