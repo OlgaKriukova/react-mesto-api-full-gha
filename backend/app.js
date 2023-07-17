@@ -23,8 +23,8 @@ const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 
 const allowedCors = [
-  'https://praktikum.tk',
-  'http://praktikum.tk',
+  'https://mesto.ok.front.nomoredomain1s.work',
+  'http://mesto.ok.front.nomoredomain1s.work',
   'localhost:3000',
   'http://localhost:3000',
 ];
