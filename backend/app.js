@@ -8,6 +8,7 @@ const helmet = require('helmet');
 const { celebrate, errors, Joi } = require('celebrate');
 const errorHandler = require('./middlewares/errorHandler');
 const NotFoundError = require('./errors/NotFoundError');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const errorMessageNotFound = 'resource not found';
 
@@ -68,6 +69,8 @@ mongoose.connect(`${MONGO_URL}/mestodb`, {
     console.log('connected to db');
   });
 
+app.use(requestLogger);
+
 app.post(
   '/signin',
   celebrate({
@@ -97,6 +100,8 @@ app.use(auth);
 
 app.use('/users', userRoutes);
 app.use('/cards', cardRoutes);
+
+app.use(errorLogger);
 
 app.use((req, res, next) => next(new NotFoundError(errorMessageNotFound)));
 
