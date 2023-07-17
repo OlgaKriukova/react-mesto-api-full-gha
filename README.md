@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес IP 51.250.14.145
+IP 51.250.14.145
 
 Frontend https://mestook.nomoredomains.xyz
 
