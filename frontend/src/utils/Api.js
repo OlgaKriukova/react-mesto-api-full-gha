@@ -148,7 +148,7 @@ class Api {
 }
 
 const api = new Api({
-baseUrl: 'http://api.mestook.nomoredomains.xyz',
+baseUrl: 'https://api.mestook.nomoredomains.xyz',
     //baseUrl: 'http://localhost:3001',
 })
 
