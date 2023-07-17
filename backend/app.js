@@ -24,8 +24,8 @@ const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 
 const allowedCors = [
-  'https://mesto.ok.front.nomoredomain1s.work',
-  'http://mesto.ok.front.nomoredomain1s.work',
+  'https://mestook.nomoredomains.xyz',
+  'http://mestook.nomoredomains.xyz',
   'localhost:3001',
   'http://localhost:3001',
 ];
@@ -70,6 +70,12 @@ mongoose.connect(`${MONGO_URL}/mestodb`, {
   });
 
 app.use(requestLogger);
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.post(
   '/signin',
